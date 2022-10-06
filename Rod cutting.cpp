@@ -2,21 +2,17 @@
 
 using namespace std;
 
-const int N = 10;
-
-int p[N] = {1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
-
-int CUT_ROD_rec(int n)
+int CUT_ROD_rec(int n, int p[])
 {
     if (n == 0)
         return 0;
     int q = INT_MIN;
 
     for (int i = 1; i <= n; i++)
-        q = max(q, p[i - 1] + CUT_ROD_rec(n - i));
+        q = max(q, p[i - 1] + CUT_ROD_rec(n - i, p));
     return q;
 }
-int MEMOIZED_CUT_ROD_AUX(int n, int r[])
+int MEMOIZED_CUT_ROD_AUX(int n, int r[], int p[])
 {
     int q;
 
@@ -29,24 +25,23 @@ int MEMOIZED_CUT_ROD_AUX(int n, int r[])
         q = INT_MIN;
 
     for (int i = 1; i <= n; i++)
-        q = max(q, p[i - 1] + MEMOIZED_CUT_ROD_AUX(n - i, r));
+        q = max(q, p[i - 1] + MEMOIZED_CUT_ROD_AUX(n - i, r, p));
     r[n] = q;
 
     return q;
 }
-int MEMOIZED_CUT_ROD(int n)
+int MEMOIZED_CUT_ROD(int n, int p[])
 {
     int r[n];
-    //    r[0] = 0;
 
     for (int i = 0; i <= n; i++)
         r[i] = INT_MIN;
 
-    return MEMOIZED_CUT_ROD_AUX(n, r);
+    return MEMOIZED_CUT_ROD_AUX(n, r, p);
 }
-int BOTTOM_UP_CUT_ROD(int n)
+int BOTTOM_UP_CUT_ROD(int n, int p[])
 {
-    int r[n];
+    int r[n + 1];
 
     r[0] = 0;
 
@@ -56,8 +51,9 @@ int BOTTOM_UP_CUT_ROD(int n)
     {
         q = INT_MIN;
 
-        for (int i = 1; i <= j; j++)
+        for (int i = 1; i <= j; i++)
             q = max(q, p[i - 1] + r[j - i]);
+
         r[j] = q;
     }
 
@@ -65,9 +61,22 @@ int BOTTOM_UP_CUT_ROD(int n)
 }
 int main()
 {
-    for (int i = 0; i <= 10; i++)
-        cout << CUT_ROD_rec(i) << "\n";
+    const int N = rand() % 20 + 1;
 
-    for (int i = 0; i <= 10; i++)
-        cout << MEMOIZED_CUT_ROD(i) << "\n";
+    int p[N];
+
+    for (int i = 0; i < N; i++)
+    {
+        int x = rand() % 50 + 1;
+
+        p[i] = x;
+    }
+
+    int x = rand() % N + 1;
+
+    cout << CUT_ROD_rec(x, p) << "\n";
+
+    cout << MEMOIZED_CUT_ROD(x, p) << "\n";
+
+    cout << BOTTOM_UP_CUT_ROD(x, p) << "\n";
 }
