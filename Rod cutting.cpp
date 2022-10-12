@@ -61,6 +61,8 @@ int BOTTOM_UP_CUT_ROD(int n, int p[])
 }
 int main()
 {
+    cout << "ROD CUTTING\n\n";
+
     const int N = rand() % 20 + 1;
 
     int p[N];
@@ -74,9 +76,39 @@ int main()
 
     int x = rand() % N + 1;
 
-    cout << CUT_ROD_rec(x, p) << "\n";
+    cout << "Recursion:\n";
 
-    cout << MEMOIZED_CUT_ROD(x, p) << "\n";
+    auto st = chrono::high_resolution_clock::now();
 
-    cout << BOTTOM_UP_CUT_ROD(x, p) << "\n";
+    cout << "Ans: " << CUT_ROD_rec(x, p) << "\n";
+
+    auto ed = chrono::high_resolution_clock::now();
+
+    auto dur = chrono::duration_cast<chrono::microseconds>(ed - st);
+
+    cout << "Time required: " << dur.count() << " microseconds\n\n";
+
+    cout << "Memoized:\n";
+
+    auto st1 = chrono::high_resolution_clock::now();
+
+    cout << "Ans: " << MEMOIZED_CUT_ROD(x, p) << "\n";
+
+    auto ed1 = chrono::high_resolution_clock::now();
+
+    auto dur1 = chrono::duration_cast<chrono::microseconds>(ed1 - st1);
+
+    cout << "Time required: " << dur1.count() << " microseconds\n\n";
+
+    cout << "Bottom_up:\n";
+
+    auto st2 = chrono::high_resolution_clock::now();
+
+    cout << "Ans: " << BOTTOM_UP_CUT_ROD(x, p) << "\n";
+
+    auto ed2 = chrono::high_resolution_clock::now();
+
+    auto dur2 = chrono::duration_cast<chrono::microseconds>(ed2 - st2);
+
+    cout << "Time required: " << dur2.count() << " microseconds\n\n";
 }

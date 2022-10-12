@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 
-int lis_rec(int arr[], int n, int *max_ref)
+using namespace std;
+
+int lis_rec_max(int arr[], int n, int *max_ref)
 {
     if (n == 1)
         return 1;
@@ -9,7 +11,7 @@ int lis_rec(int arr[], int n, int *max_ref)
 
     for (int i = 1; i < n; i++)
     {
-        res = lis_rec(arr, i, max_ref);
+        res = lis_rec_max(arr, i, max_ref);
         if (arr[i - 1] < arr[n - 1] && res + 1 > end)
             end = res + 1;
     }
@@ -18,6 +20,14 @@ int lis_rec(int arr[], int n, int *max_ref)
         *max_ref = end;
 
     return end;
+}
+int lis_rec(int arr[], int n)
+{
+    int max = 1;
+
+    lis_rec_max(arr, n, &max);
+
+    return max;
 }
 int lis_bottom_up(int arr[], int n)
 {
@@ -82,8 +92,45 @@ int lis_memo(int arr[], int n)
     }
     return dp[m][n];
 }
-using namespace std;
-
 int main()
 {
+    // int arr[] = {10, 22, 9, 33, 21, 50, 41, 60};
+    // int n = sizeof(arr) / sizeof(arr[0]);
+
+    int n = rand() % 10 + 1;
+
+    int arr[n];
+
+    for (int i = 0; i < n; i++)
+        arr[i] = rand() % 100 + 1;
+
+    auto st = chrono::high_resolution_clock::now();
+
+    cout << lis_rec(arr, n) << "\n";
+
+    auto ed = chrono::high_resolution_clock::now();
+
+    auto dur = chrono::duration_cast<chrono::microseconds>(ed - st);
+
+    cout << dur.count() << "\n";
+
+    auto st1 = chrono::high_resolution_clock::now();
+
+    cout << lis_bottom_up(arr, n) << "\n";
+
+    auto ed1 = chrono::high_resolution_clock::now();
+
+    auto dur1 = chrono::duration_cast<chrono::microseconds>(ed1 - st1);
+
+    cout << dur1.count() << "\n";
+
+    auto st2 = chrono::high_resolution_clock::now();
+
+    cout << lis_memo(arr, n) << "\n";
+
+    auto ed2 = chrono::high_resolution_clock::now();
+
+    auto dur2 = chrono::duration_cast<chrono::microseconds>(ed2 - st2);
+
+    cout << dur2.count() << "\n";
 }
