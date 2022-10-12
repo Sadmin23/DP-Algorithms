@@ -50,21 +50,24 @@ int knapsack_memo(int W, int w[], int val[], int n)
 }
 int main()
 {
+    cout << "0-1 KNAPSACK\n\n";
 
     // int N = 3;
 
     // int val[N] = {60, 100, 120};
     // int w[N] = {10, 20, 30};
-
+    //  srand(time(NULL));
     int N = rand() % 10 + 3;
     int val[N], w[N];
 
     for (int i = 0; i < N; i++)
     {
+        // srand(time(NULL));
         int a = rand() % 30 + 1;
 
         val[i] = a * 10;
 
+        // srand(time(NULL));
         int b = rand() % 3 + 1;
 
         w[i] = b * 10;
@@ -72,44 +75,58 @@ int main()
 
     int W = 50;
 
-    cout << N << "\n";
+    cout << "Size of both arrays: " << N << "\n\n";
+
+    cout << "Values: ";
 
     for (int i = 0; i < N; i++)
-        cout << val[i] << " ";
-    puts("");
+        cout
+            << val[i] << " ";
+    cout << "\n\n";
+
+    cout << "Weights: ";
 
     for (int i = 0; i < N; i++)
         cout << w[i] << " ";
-    puts("");
-    // auto st = chrono::high_resolution_clock::now();
+    cout << "\n\n";
 
-    // cout << knapsack_rec(W, w, val, N) << "\n";
+    cout << "Total Weight: " << W << "\n\n";
 
-    // auto ed = chrono::high_resolution_clock::now();
+    cout << "Recursion:\n";
 
-    // auto dur = chrono::duration_cast<chrono::microseconds>(ed - st);
+    auto st = chrono::high_resolution_clock::now();
 
-    // cout << dur.count() << "\n";
+    cout << "Ans: " << knapsack_rec(W, w, val, N) << "\n";
 
-    // auto st1 = chrono::high_resolution_clock::now();
+    auto ed = chrono::high_resolution_clock::now();
 
-    // cout << knapsack_bottom_up(W, w, val, N) << "\n";
+    auto dur = chrono::duration_cast<chrono::microseconds>(ed - st);
 
-    // auto ed1 = chrono::high_resolution_clock::now();
+    cout << "Time required: " << dur.count() << " microseconds\n\n";
 
-    // auto dur1 = chrono::duration_cast<chrono::microseconds>(ed1 - st1);
+    cout << "Bottom_up:\n";
 
-    // cout << dur1.count() << "\n";
+    auto st1 = chrono::high_resolution_clock::now();
 
-    // auto st2 = chrono::high_resolution_clock::now();
+    cout << "Ans: " << knapsack_bottom_up(W, w, val, N) << "\n";
 
-    // cout << knapsack_memo(W, w, val, N) << "\n";
+    auto ed1 = chrono::high_resolution_clock::now();
 
-    // auto ed2 = chrono::high_resolution_clock::now();
+    auto dur1 = chrono::duration_cast<chrono::microseconds>(ed1 - st1);
 
-    // auto dur2 = chrono::duration_cast<chrono::microseconds>(ed2 - st2);
+    cout << "Time required: " << dur1.count() << " microseconds\n\n";
 
-    // cout << dur2.count() << "\n";
+    cout << "Memoized:\n";
+
+    auto st2 = chrono::high_resolution_clock::now();
+
+    cout << "Ans: " << knapsack_memo(W, w, val, N) << "\n";
+
+    auto ed2 = chrono::high_resolution_clock::now();
+
+    auto dur2 = chrono::duration_cast<chrono::microseconds>(ed2 - st2);
+
+    cout << "Time required: " << dur2.count() << " microseconds\n\n";
 
     return 0;
 }

@@ -94,6 +94,8 @@ int lis_memo(int arr[], int n)
 }
 int main()
 {
+    cout << "LONGSET INCREASING SUBSEQUENCE\n\n";
+
     // int arr[] = {10, 22, 9, 33, 21, 50, 41, 60};
     // int n = sizeof(arr) / sizeof(arr[0]);
 
@@ -104,33 +106,44 @@ int main()
     for (int i = 0; i < n; i++)
         arr[i] = rand() % 100 + 1;
 
+    cout << "Size of array: " << n << "\n\n";
+
+    cout << "Array: ";
+
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+
+    cout << "\n\n";
+
+    cout << "Recursion:\n";
+
     auto st = chrono::high_resolution_clock::now();
 
-    cout << lis_rec(arr, n) << "\n";
+    cout << "Ans: " << lis_rec(arr, n) << "\n";
 
     auto ed = chrono::high_resolution_clock::now();
 
     auto dur = chrono::duration_cast<chrono::microseconds>(ed - st);
 
-    cout << dur.count() << "\n";
+    cout << "Time required: " << dur.count() << " microseconds\n\n";
 
     auto st1 = chrono::high_resolution_clock::now();
 
-    cout << lis_bottom_up(arr, n) << "\n";
+    cout << "Ans: " << lis_bottom_up(arr, n) << "\n";
 
     auto ed1 = chrono::high_resolution_clock::now();
 
     auto dur1 = chrono::duration_cast<chrono::microseconds>(ed1 - st1);
 
-    cout << dur1.count() << "\n";
+    cout << "Time required: " << dur1.count() << " microseconds\n\n";
 
     auto st2 = chrono::high_resolution_clock::now();
 
-    cout << lis_memo(arr, n) << "\n";
+    cout << "Ans: " << lis_memo(arr, n) << "\n";
 
     auto ed2 = chrono::high_resolution_clock::now();
 
     auto dur2 = chrono::duration_cast<chrono::microseconds>(ed2 - st2);
 
-    cout << dur2.count() << "\n";
+    cout << "Time required: " << dur1.count() << " microseconds\n\n";
 }

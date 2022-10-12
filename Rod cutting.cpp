@@ -63,7 +63,13 @@ int main()
 {
     cout << "ROD CUTTING\n\n";
 
-    const int N = rand() % 20 + 1;
+    // int N = 10;
+
+    // int p[N] = {1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
+
+    // int x = N;
+
+    int N = rand() % 20 + 1;
 
     int p[N];
 
@@ -75,6 +81,17 @@ int main()
     }
 
     int x = rand() % N + 1;
+
+    cout << "Size of rod cuts: " << N << "\n\n";
+
+    cout << "Values of rod cuts: ";
+
+    for (int i = 0; i < N; i++)
+        cout << p[i] << " ";
+
+    cout << "\n\n";
+
+    cout << "No. of maximized cuts: " << x << "\n\n";
 
     cout << "Recursion:\n";
 
