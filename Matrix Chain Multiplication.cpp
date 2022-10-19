@@ -129,7 +129,7 @@ int mult2(string s)
             else
                 matrix_mult(b, a);
 
-            cout << a << " " << b << "\n";
+            // cout << a << " " << b << "\n";
 
             ans.push(indx);
 
@@ -171,15 +171,12 @@ int main()
 
     indx = n - 2;
 
-    cout << n << "\n";
-
-    for (int i = 0; i < n; i++)
-        cout << p[i] << " ";
-
-    puts("\n");
+    cout << "MATRICES:\n\n";
 
     for (int i = 0; i < n - 1; i++)
     {
+        printf("A%d:\n", i + 1);
+
         for (int j = 0; j < p[i]; j++)
         {
             for (int k = 0; k < p[i + 1]; k++)
@@ -188,18 +185,22 @@ int main()
             }
             puts("");
         }
-        puts("\n");
+        puts("");
     }
 
-    cout << matrix_bottom_up(p, n) << "\n";
+    cout << "Minimum Multiplications: " << matrix_bottom_up(p, n) << "\n";
 
     puts("");
+
+    cout << "Matrix Chain Sequence: ";
 
     optimal(1, n - 1);
 
-    puts("");
+    puts("\n");
 
     int x = mult2(mult(seq));
+
+    cout << "Final Answer:\n\n";
 
     for (int i = 0; i < dim[x].first; i++)
     {
@@ -210,6 +211,8 @@ int main()
 
         puts("");
     }
+
+    puts("");
 
     return 0;
 }
