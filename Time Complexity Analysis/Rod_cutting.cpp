@@ -69,6 +69,8 @@ int main()
 
     // int x = N;
 
+    srand(time(0));
+
     int N = rand() % 20 + 1;
 
     int p[N];

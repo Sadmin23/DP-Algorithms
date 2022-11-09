@@ -56,7 +56,9 @@ int main()
 
     // int val[N] = {60, 100, 120};
     // int w[N] = {10, 20, 30};
-    //  srand(time(NULL));
+
+    srand(time(0));
+
     int N = rand() % 10 + 3;
     int val[N], w[N];
 
